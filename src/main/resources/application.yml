@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: zuul-study
+
+zuul:
+  debug:
+    request: true
+  routes:
+    hello-world-2:
+      path: /gateway/hello-world/v2/**
+      stripPrefix: true
+      location: hello-world-2
+    hello-world-1:
+      path: /gateway/hello-world/**
+      stripPrefix: true
+      location: hello-world-1
+
+hello-world-1:
+  ribbon:
+    ConnectTimeout: 5000
+    ReadTimeout: 100
+    listOfServers: http://localhost:8081/
+
+hello-world-2:
+  ribbon:
+    ConnectTimeout: 5000
+    ReadTimeout: 100
+    listOfServers: http://localhost:8082/
+
